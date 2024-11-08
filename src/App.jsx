@@ -1,12 +1,15 @@
-import Heading from './components/Navbar'
+import Home from './pages/Home'
 import './App.css'
 import Header from './components/Navbar'
 
+
 function App() {
+  
 
   return (
     <>
       <Header />
+      <Home />
     </>
   )
 }
