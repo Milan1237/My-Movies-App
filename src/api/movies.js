@@ -1,10 +1,10 @@
 import { setMovies } from "../redux/movieSlice";
 
-const url1 = 'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&region=IN';
-const url2 = 'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=2&sort_by=popularity.desc&region=IN';
-const url3 = 'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=3&sort_by=popularity.desc&region=IN';
-const url4 = 'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=4&sort_by=popularity.desc&region=IN';
-const url5 = 'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=5&sort_by=popularity.desc&region=IN';
+const url1 = 'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&with_original_language=en&sort_by=vote_average.desc&vote_count.gte=1000&page=1';
+const url2 = 'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&with_original_language=en&sort_by=vote_average.desc&vote_count.gte=1000&page=2';
+const url3 = 'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&with_original_language=en&sort_by=vote_average.desc&vote_count.gte=1000&page=3';
+const url4 = 'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&with_original_language=en&sort_by=vote_average.desc&vote_count.gte=1000&page=4';
+const url5 = 'https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&with_original_language=en&sort_by=vote_average.desc&vote_count.gte=1000&page=5';
 const options = {
     method: 'GET',
     headers: {
