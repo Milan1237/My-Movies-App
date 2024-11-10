@@ -10,6 +10,18 @@ import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import Dropdown from "./Dropdown";
+import { debounce } from "lodash";
+import {setRating, setSearch} from '../redux/movieSlice'
+import { useDispatch, useSelector } from "react-redux";
+import { getMovies, getMoviesBySearch } from "../api/movies";
+import { setGenre } from "../redux/movieSlice";
+const ratingData = {
+  '5': 'more than 5',
+  '6': 'more than 6',
+  '7': 'more than 7',
+  '8': 'more than 8',
+  '9': 'more than 9'
+}
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -54,7 +66,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function PrimarySearchAppBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
+  const {categories} = useSelector(state=> state.movie);
+  const dispatch = useDispatch() ; 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -74,6 +87,17 @@ export default function PrimarySearchAppBar() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+  
+
+  const handleSearch =  debounce((value)=>{
+    if(value != ``){
+      dispatch(setSearch(value));
+    dispatch(getMoviesBySearch(value));
+    }
+    else{
+      dispatch(getMovies());
+    }
+  } , 500);
 
   const menuId = "primary-search-account-menu";
   const renderMenu = (
@@ -135,8 +159,8 @@ export default function PrimarySearchAppBar() {
           >
             MUI
           </Typography>
-          <Search>
-            <SearchIconWrapper>
+          <Search onChange={(event)=>{handleSearch(event.target.value)}}>
+            <SearchIconWrapper >
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
@@ -146,8 +170,9 @@ export default function PrimarySearchAppBar() {
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <div style={{display: 'flex' , alignItems: 'center'}}>
-            <Dropdown />
-            <Dropdown />
+            <Dropdown name={'genre'} values={categories} setGlobal={setGenre}/>
+            <Dropdown name={'rating'}  values={ratingData} setGlobal={setRating}/>
+            
           </div>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton

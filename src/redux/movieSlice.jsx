@@ -1,7 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getMovies } from "../api/movies";
 const initialState = {
-    movies: []
+    movies: [] , 
+    categories: {},
+    searchValue: '', 
+    rating: '',
+    genre: '',
 }
 const movieSlice= createSlice({
     name: 'movie',
@@ -9,9 +12,22 @@ const movieSlice= createSlice({
     reducers: {
         setMovies: (state , action)=>{
             state.movies = action.payload
-        }  
+        },
+        setCategories: (state ,action)=>{
+            state.categories = action.payload ; 
+        } , 
+        setSearch: (state, action)=>{
+                state.searchValue = action.payload ; 
+        },
+        setRating: (state , action) =>{
+            state.rating = action.payload ;
+        },
+        setGenre: (state , action) =>{
+            state.genre = action.payload ;
+        },
+
     }
 })
 
-export const {setMovies} = movieSlice.actions ; 
+export const {setMovies , setCategories , setSearch , setRating , setGenre} = movieSlice.actions ; 
 export default movieSlice.reducer ; 
