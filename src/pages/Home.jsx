@@ -1,13 +1,13 @@
 import React from "react";
 import { useEffect, Suspense } from "react";
-import { getCategories, getMovies } from "../api/movies";
+import { getMovies } from "../api/movies";
 import { useDispatch, useSelector } from "react-redux";
 const MovieCard = React.lazy(() => import("../components/Card"));
 
 const Home = () => {
   const dispatch = useDispatch();
   const { movies } = useSelector((state) => state.movie);
-  console.log(movies);
+  // console.log(movies);
   console.log('home re-rendered');
   useEffect(() => {
     dispatch(getMovies('home'));
