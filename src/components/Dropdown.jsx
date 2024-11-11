@@ -12,17 +12,13 @@ function Dropdown({name, values , setGlobal}) {
   const {searchValue , genre , rating} = useSelector(state=> state.movie);
   const handleChange = (event) => {
     dispatch(setGlobal(event.target.value));
-    
   };
-  console.log('dropdown re-rendered');
   useEffect(()=>{
     if(searchValue == ''){
       if(genre!= '' || rating !=''){
         dispatch(FilterMoviesFromServer({genre , rating}))
       }
-      else{
-        dispatch(getMovies());
-      }
+      
     }
     
   } , [genre , rating , searchValue]);

@@ -16,11 +16,12 @@ const options = {
     }
 };
 
-export const getMovies = () => async dispatch => {
+export const getMovies = (source) => async dispatch => {
     try {
         const response = await Promise.all([fetch(url1, options), fetch(url2, options), fetch(url3, options), fetch(url4, options), fetch(url5, options)]);
         const data = await Promise.all(response.map(res => res.json()));
         const result = data.map(dat => dat.results).flat(1);
+        console.log(source);
         dispatch(setMovies(result));
     } catch (error) {
         console.log(error);

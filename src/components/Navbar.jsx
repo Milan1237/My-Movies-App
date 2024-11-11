@@ -15,6 +15,7 @@ import {setRating, setSearch} from '../redux/movieSlice'
 import { useDispatch, useSelector } from "react-redux";
 import { getMovies, getMoviesBySearch } from "../api/movies";
 import { setGenre } from "../redux/movieSlice";
+import { getCategories } from "../api/movies";
 const ratingData = {
   '5': 'more than 5',
   '6': 'more than 6',
@@ -63,7 +64,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function PrimarySearchAppBar() {
+ function PrimarySearchAppBar() {
+  React.useEffect(()=>{
+    dispatch(getCategories());
+  } , [])
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const {categories} = useSelector(state=> state.movie);
@@ -172,7 +176,7 @@ export default function PrimarySearchAppBar() {
           <div style={{display: 'flex' , alignItems: 'center'}}>
             <Dropdown name={'genre'} values={categories} setGlobal={setGenre}/>
             <Dropdown name={'rating'}  values={ratingData} setGlobal={setRating}/>
-            
+
           </div>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -189,3 +193,5 @@ export default function PrimarySearchAppBar() {
     </Box>
   );
 }
+
+export default React.memo(PrimarySearchAppBar);

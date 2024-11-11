@@ -7,9 +7,9 @@ const MovieCard = React.lazy(() => import("../components/Card"));
 const Home = () => {
   const dispatch = useDispatch();
   const { movies } = useSelector((state) => state.movie);
+  console.log('home re-rendered');
   useEffect(() => {
-    dispatch(getMovies());
-    dispatch(getCategories());
+    dispatch(getMovies('home'));
   }, []);
   return (
     <>
